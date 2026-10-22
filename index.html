@@ -1,0 +1,1782 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC Builder Pro</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
+}
+
+header{
+    background:linear-gradient(135deg,#090909,#161616);
+    border-bottom:1px solid #ff6a00;
+    padding:22px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#ff6a00;
+}
+
+.badge{
+    background:#ff6a00;
+    color:#111;
+    padding:7px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.container{
+    width:92%;
+    max-width:1250px;
+    margin:35px auto;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.hero h1 span{
+    color:#ff6a00;
+}
+
+.hero p{
+    color:#aaa;
+    max-width:750px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.panel{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+.panel h2{
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+label{
+    display:block;
+    color:#bbb;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+input,select{
+    width:100%;
+    background:#080808;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:10px;
+    padding:13px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#ff6a00;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.main-btn{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    border-radius:12px;
+    background:#ff6a00;
+    color:#111;
+    font-size:16px;
+}
+
+.main-btn:hover{
+    background:#ff812b;
+}
+
+.result-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.total{
+    color:#ff6a00;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.budget-status{
+    padding:8px 12px;
+    border-radius:8px;
+    background:#172817;
+    color:#7dff7d;
+    font-size:13px;
+}
+
+.parts{
+    display:grid;
+    gap:10px;
+    margin-top:20px;
+}
+
+.part{
+    background:#0b0b0b;
+    border:1px solid #292929;
+    border-radius:12px;
+    padding:15px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:15px;
+}
+
+.part-name{
+    font-weight:bold;
+}
+
+.part-info{
+    color:#999;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.part-price{
+    color:#ff6a00;
+    font-weight:bold;
+}
+
+.store-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:12px;
+}
+
+.store-buttons a{
+    text-decoration:none;
+    color:#fff;
+    background:#191919;
+    border:1px solid #333;
+    padding:7px 10px;
+    border-radius:7px;
+    font-size:11px;
+}
+
+.store-buttons a:hover{
+    border-color:#ff6a00;
+}
+
+.performance{
+    margin-top:20px;
+    padding:18px;
+    background:#151515;
+    border-radius:12px;
+}
+
+.performance h3{
+    margin-bottom:12px;
+}
+
+.fps{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #252525;
+}
+
+.fps:last-child{
+    border-bottom:0;
+}
+
+.warning{
+    background:#2a1d08;
+    border:1px solid #8a5a00;
+    color:#ffd27a;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    line-height:1.5;
+}
+
+.success{
+    background:#0c2513;
+    border:1px solid #235d31;
+    color:#8cff9b;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    line-height:1.5;
+}
+
+.tier{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:7px;
+    background:#252525;
+    color:#ff8b3d;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.empty{
+    text-align:center;
+    color:#999;
+    padding:30px;
+}
+
+footer{
+    text-align:center;
+    color:#666;
+    padding:30px;
+    font-size:12px;
+    line-height:1.6;
+}
+
+@media(max-width:700px){
+    .hero h1{
+        font-size:30px;
+    }
+
+    .part{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">PC<span>BUILDER</span> PRO</div>
+    <div class="badge">BUILD INTELIGENTE</div>
+</header>
+
+<div class="container">
+
+<section class="hero">
+    <h1>Monte o PC <span>certo</span> para seu orçamento</h1>
+    <p>
+        Coloque quanto você realmente pode gastar.
+        O sistema tenta montar a melhor configuração possível
+        sem ultrapassar seu orçamento.
+    </p>
+</section>
+
+<section class="panel">
+
+<h2>⚙️ Configure seu PC</h2>
+
+<div class="form-grid">
+
+<div>
+<label>Quanto você pode gastar?</label>
+<input id="budget" type="number" min="1000" value="3000">
+</div>
+
+<div>
+<label>Jogo principal</label>
+<select id="game">
+<option value="valorant">Valorant</option>
+<option value="cs2">Counter-Strike 2</option>
+<option value="fortnite">Fortnite</option>
+<option value="minecraft">Minecraft</option>
+<option value="gta5">GTA V</option>
+<option value="gtavi">GTA VI</option>
+<option value="warzone">Warzone</option>
+<option value="cyberpunk">Cyberpunk 2077</option>
+<option value="reddead">Red Dead Redemption 2</option>
+<option value="general">Vários jogos</option>
+</select>
+</div>
+
+<div>
+<label>Resolução</label>
+<select id="resolution">
+<option value="720">720p</option>
+<option value="1080" selected>1080p</option>
+<option value="1440">1440p</option>
+<option value="2160">4K</option>
+</select>
+</div>
+
+<div>
+<label>Qualidade gráfica</label>
+<select id="quality">
+<option value="low">Baixa</option>
+<option value="medium">Média</option>
+<option value="high" selected>Alta</option>
+<option value="ultra">Ultra</option>
+</select>
+</div>
+
+<div>
+<label>Uso principal</label>
+<select id="usage">
+<option value="gaming">Gaming</option>
+<option value="gamingstream">Gaming + Stream</option>
+<option value="work">Trabalho/Estudo</option>
+<option value="editing">Edição de vídeo</option>
+<option value="ai">IA / Workstation</option>
+</select>
+</div>
+
+<div>
+<label>Preferência</label>
+<select id="market">
+<option value="new">Priorizar peças novas</option>
+<option value="cheap">Menor preço possível</option>
+<option value="premium">Priorizar qualidade</option>
+</select>
+</div>
+
+</div>
+
+<button class="main-btn" onclick="montarPC()">
+🚀 MONTAR MEU PC
+</button>
+
+</section>
+
+<section id="resultado" class="panel">
+
+<div class="empty">
+Digite seu orçamento e clique em "Montar meu PC".
+</div>
+
+</section>
+
+</div>
+
+<footer>
+    PC Builder Pro © 2026<br>
+    Preços exibidos neste protótipo são referências e podem mudar.
+    Frete, promoções, estoque e impostos podem alterar o valor final.
+</footer>
+
+<script>
+
+/*
+=========================================================
+CATÁLOGO DE REFERÊNCIA
+=========================================================
+
+IMPORTANTE:
+
+Este catálogo serve para o protótipo funcionar sem servidor.
+
+Para transformar o site em um comparador REAL,
+o ideal é substituir esses valores por dados vindos
+de uma API/backend ou sistema de ofertas.
+
+O algoritmo NUNCA escolhe uma configuração acima
+do orçamento informado.
+*/
+
+const pecas = {
+
+    cpu: [
+
+        {
+            nome:"AMD Ryzen 3 3200G",
+            preco:250,
+            score:25,
+            tipo:"APU / econômico",
+            socket:"AM4",
+            usado:true
+        },
+
+        {
+            nome:"AMD Ryzen 5 4600G",
+            preco:430,
+            score:45,
+            tipo:"APU / econômico",
+            socket:"AM4"
+        },
+
+        {
+            nome:"AMD Ryzen 5 5600GT",
+            preco:650,
+            score:58,
+            tipo:"APU",
+            socket:"AM4"
+        },
+
+        {
+            nome:"AMD Ryzen 5 5600",
+            preco:700,
+            score:65,
+            tipo:"Gaming",
+            socket:"AM4"
+        },
+
+        {
+            nome:"AMD Ryzen 5 7600",
+            preco:1100,
+            score:78,
+            tipo:"Gaming",
+            socket:"AM5"
+        },
+
+        {
+            nome:"AMD Ryzen 7 7800X3D",
+            preco:2100,
+            score:95,
+            tipo:"High-End Gaming",
+            socket:"AM5"
+        },
+
+        {
+            nome:"AMD Ryzen 7 9800X3D",
+            preco:2900,
+            score:100,
+            tipo:"Extreme Gaming",
+            socket:"AM5"
+        },
+
+        {
+            nome:"AMD Ryzen 9 9950X3D",
+            preco:4200,
+            score:108,
+            tipo:"Workstation / Extreme",
+            socket:"AM5"
+        }
+
+    ],
+
+    gpu: [
+
+        {
+            nome:"Vídeo integrado Vega",
+            preco:0,
+            score:15,
+            vram:0,
+            tipo:"Integrado"
+        },
+
+        {
+            nome:"Radeon RX 580 8GB",
+            preco:450,
+            score:35,
+            vram:8,
+            usado:true,
+            tipo:"Econômica"
+        },
+
+        {
+            nome:"Radeon RX 6600 8GB",
+            preco:1100,
+            score:62,
+            vram:8,
+            tipo:"1080p"
+        },
+
+        {
+            nome:"GeForce RTX 4060 8GB",
+            preco:1700,
+            score:72,
+            vram:8,
+            tipo:"1080p / 1440p"
+        },
+
+        {
+            nome:"Radeon RX 7700 XT 12GB",
+            preco:2600,
+            score:82,
+            vram:12,
+            tipo:"1440p"
+        },
+
+        {
+            nome:"GeForce RTX 5070 12GB",
+            preco:3800,
+            score:90,
+            vram:12,
+            tipo:"1440p / 4K"
+        },
+
+        {
+            nome:"GeForce RTX 5070 Ti 16GB",
+            preco:5200,
+            score:98,
+            vram:16,
+            tipo:"1440p / 4K"
+        },
+
+        {
+            nome:"GeForce RTX 5080 16GB",
+            preco:12000,
+            score:112,
+            vram:16,
+            tipo:"4K High-End"
+        },
+
+        {
+            nome:"GeForce RTX 5090 32GB",
+            preco:35000,
+            score:145,
+            vram:32,
+            tipo:"Extreme / 4K"
+        }
+
+    ],
+
+    motherboard: [
+
+        {
+            nome:"A320M",
+            preco:180,
+            socket:"AM4",
+            quality:1
+        },
+
+        {
+            nome:"B450M",
+            preco:300,
+            socket:"AM4",
+            quality:2
+        },
+
+        {
+            nome:"B550M",
+            preco:430,
+            socket:"AM4",
+            quality:3
+        },
+
+        {
+            nome:"B650M",
+            preco:750,
+            socket:"AM5",
+            quality:3
+        },
+
+        {
+            nome:"X670E",
+            preco:1500,
+            socket:"AM5",
+            quality:5
+        },
+
+        {
+            nome:"X870E High-End",
+            preco:2200,
+            socket:"AM5",
+            quality:6
+        }
+
+    ],
+
+    ram: [
+
+        {
+            nome:"8GB DDR4",
+            preco:150,
+            capacity:8,
+            type:"DDR4"
+        },
+
+        {
+            nome:"16GB DDR4 (2x8GB)",
+            preco:280,
+            capacity:16,
+            type:"DDR4"
+        },
+
+        {
+            nome:"32GB DDR4 (2x16GB)",
+            preco:500,
+            capacity:32,
+            type:"DDR4"
+        },
+
+        {
+            nome:"16GB DDR5 (2x8GB)",
+            preco:400,
+            capacity:16,
+            type:"DDR5"
+        },
+
+        {
+            nome:"32GB DDR5 (2x16GB)",
+            preco:650,
+            capacity:32,
+            type:"DDR5"
+        },
+
+        {
+            nome:"64GB DDR5 (2x32GB)",
+            preco:1200,
+            capacity:64,
+            type:"DDR5"
+        },
+
+        {
+            nome:"128GB DDR5 (4x32GB)",
+            preco:2400,
+            capacity:128,
+            type:"DDR5"
+        }
+
+    ],
+
+    storage: [
+
+        {
+            nome:"SSD SATA 240GB",
+            preco:100,
+            capacity:240
+        },
+
+        {
+            nome:"SSD SATA 480GB",
+            preco:170,
+            capacity:480
+        },
+
+        {
+            nome:"SSD NVMe 500GB",
+            preco:220,
+            capacity:500
+        },
+
+        {
+            nome:"SSD NVMe 1TB",
+            preco:400,
+            capacity:1000
+        },
+
+        {
+            nome:"SSD NVMe 2TB",
+            preco:750,
+            capacity:2000
+        },
+
+        {
+            nome:"SSD NVMe 4TB",
+            preco:1500,
+            capacity:4000
+        }
+
+    ],
+
+    psu: [
+
+        {
+            nome:"Fonte 400W 80 Plus",
+            preco:150,
+            watts:400
+        },
+
+        {
+            nome:"Fonte 500W 80 Plus",
+            preco:220,
+            watts:500
+        },
+
+        {
+            nome:"Fonte 650W 80 Plus Bronze",
+            preco:320,
+            watts:650
+        },
+
+        {
+            nome:"Fonte 750W 80 Plus Gold",
+            preco:550,
+            watts:750
+        },
+
+        {
+            nome:"Fonte 850W 80 Plus Gold",
+            preco:750,
+            watts:850
+        },
+
+        {
+            nome:"Fonte 1000W 80 Plus Gold",
+            preco:1000,
+            watts:1000
+        },
+
+        {
+            nome:"Fonte 1200W 80 Plus Platinum",
+            preco:1500,
+            watts:1200
+        }
+
+    ],
+
+    case: [
+
+        {
+            nome:"Gabinete básico",
+            preco:100
+        },
+
+        {
+            nome:"Gabinete Gamer airflow",
+            preco:250
+        },
+
+        {
+            nome:"Gabinete Gamer premium",
+            preco:500
+        },
+
+        {
+            nome:"Gabinete High-End",
+            preco:900
+        },
+
+        {
+            nome:"Gabinete Enthusiast",
+            preco:1500
+        }
+
+    ],
+
+    cooler: [
+
+        {
+            nome:"Cooler box",
+            preco:0
+        },
+
+        {
+            nome:"Air Cooler básico",
+            preco:130
+        },
+
+        {
+            nome:"Air Cooler torre",
+            preco:280
+        },
+
+        {
+            nome:"Water Cooler 240mm",
+            preco:450
+        },
+
+        {
+            nome:"Water Cooler 360mm",
+            preco:700
+        }
+
+    ]
+
+};
+
+
+/*
+=========================================================
+JOGOS
+=========================================================
+*/
+
+const jogos = {
+
+    valorant:{
+        nome:"Valorant",
+        exigencia:20
+    },
+
+    cs2:{
+        nome:"Counter-Strike 2",
+        exigencia:35
+    },
+
+    fortnite:{
+        nome:"Fortnite",
+        exigencia:45
+    },
+
+    minecraft:{
+        nome:"Minecraft",
+        exigencia:30
+    },
+
+    gta5:{
+        nome:"GTA V",
+        exigencia:50
+    },
+
+    gtavi:{
+        nome:"GTA VI",
+        exigencia:90
+    },
+
+    warzone:{
+        nome:"Warzone",
+        exigencia:70
+    },
+
+    cyberpunk:{
+        nome:"Cyberpunk 2077",
+        exigencia:85
+    },
+
+    reddead:{
+        nome:"Red Dead Redemption 2",
+        exigencia:75
+    },
+
+    general:{
+        nome:"Vários jogos",
+        exigencia:60
+    }
+
+};
+
+
+/*
+=========================================================
+FUNÇÕES AUXILIARES
+=========================================================
+*/
+
+function dinheiro(valor){
+
+    return valor.toLocaleString("pt-BR",{
+        style:"currency",
+        currency:"BRL"
+    });
+
+}
+
+
+function buscarShopee(nome){
+
+    return "https://shopee.com.br/search?keyword="
+        +encodeURIComponent(nome);
+
+}
+
+
+function buscarMercadoLivre(nome){
+
+    return "https://lista.mercadolivre.com.br/"
+        +encodeURIComponent(nome);
+
+}
+
+
+function buscarPichau(nome){
+
+    return "https://www.pichau.com.br/search?q="
+        +encodeURIComponent(nome);
+
+}
+
+
+function buscarKabum(nome){
+
+    return "https://www.kabum.com.br/busca/"
+        +encodeURIComponent(nome);
+
+}
+
+
+function buscarTerabyte(nome){
+
+    return "https://www.terabyteshop.com.br/busca?str="
+        +encodeURIComponent(nome);
+
+}
+
+
+function escolher(array, filtro){
+
+    return array
+        .filter(filtro)
+        .sort((a,b)=>a.preco-b.preco)[0];
+
+}
+
+
+/*
+=========================================================
+MONTADOR
+=========================================================
+*/
+
+function montarPC(){
+
+    const budget =
+        Number(document.getElementById("budget").value);
+
+    const game =
+        document.getElementById("game").value;
+
+    const resolution =
+        Number(document.getElementById("resolution").value);
+
+    const quality =
+        document.getElementById("quality").value;
+
+    const usage =
+        document.getElementById("usage").value;
+
+    const market =
+        document.getElementById("market").value;
+
+
+    if(!budget || budget < 1000){
+
+        mostrarMensagem(
+            "⚠️ Coloque pelo menos R$ 1.000 para montar uma configuração."
+        );
+
+        return;
+    }
+
+
+    /*
+    ------------------------------------------------------
+    DEFINIÇÃO DO NÍVEL DO PC
+    ------------------------------------------------------
+    */
+
+    let nivel = "Entrada";
+
+    if(budget >= 2500) nivel = "Entrada Gamer";
+
+    if(budget >= 5000) nivel = "Intermediário";
+
+    if(budget >= 8000) nivel = "Alto Desempenho";
+
+    if(budget >= 15000) nivel = "High-End";
+
+    if(budget >= 30000) nivel = "Extreme";
+
+    if(budget >= 50000) nivel = "Enthusiast";
+
+
+    /*
+    ------------------------------------------------------
+    RESERVA
+
+    Não vamos gastar obrigatoriamente 100%.
+
+    Isso deixa espaço para:
+    - frete
+    - diferença de preço
+    - promoção
+    - periféricos
+    ------------------------------------------------------
+    */
+
+    let limite = budget;
+
+    if(budget < 2000){
+
+        limite = budget * 0.97;
+
+    }else{
+
+        limite = budget * 0.98;
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    ESCOLHA DA CPU
+    ------------------------------------------------------
+    */
+
+    let cpu;
+
+    if(budget < 1500){
+
+        cpu = escolher(
+            pecas.cpu,
+            x => x.preco <= limite &&
+            (x.nome.includes("3200G") ||
+             x.nome.includes("4600G"))
+        );
+
+    }
+    else if(budget < 3000){
+
+        cpu = escolher(
+            pecas.cpu,
+            x => x.preco <= limite &&
+            x.nome.includes("5600GT")
+        );
+
+    }
+    else if(budget < 6500){
+
+        cpu = escolher(
+            pecas.cpu,
+            x => x.preco <= limite &&
+            x.nome.includes("5600")
+        );
+
+    }
+    else if(budget < 15000){
+
+        cpu = escolher(
+            pecas.cpu,
+            x => x.preco <= limite &&
+            x.nome.includes("7800X3D")
+        );
+
+    }
+    else if(budget < 30000){
+
+        cpu = escolher(
+            pecas.cpu,
+            x => x.preco <= limite &&
+            x.nome.includes("9800X3D")
+        );
+
+    }
+    else{
+
+        cpu = escolher(
+            pecas.cpu,
+            x => x.preco <= limite &&
+            x.nome.includes("9950X3D")
+        );
+
+    }
+
+
+    if(!cpu){
+
+        mostrarMensagem(
+            "Não encontrei CPU compatível dentro desse orçamento."
+        );
+
+        return;
+    }
+
+
+    /*
+    ------------------------------------------------------
+    GPU
+    ------------------------------------------------------
+    */
+
+    let gpu;
+
+
+    if(budget < 1500){
+
+        gpu = pecas.gpu.find(
+            x => x.nome.includes("integrado")
+        );
+
+    }
+    else if(budget < 2800){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RX 580") &&
+            x.preco <= budget * .25
+        );
+
+    }
+    else if(budget < 4500){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RX 6600") &&
+            x.preco <= budget * .38
+        );
+
+    }
+    else if(budget < 8000){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RTX 4060") &&
+            x.preco <= budget * .40
+        );
+
+    }
+    else if(budget < 12000){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RX 7700") &&
+            x.preco <= budget * .45
+        );
+
+    }
+    else if(budget < 18000){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RTX 5070") &&
+            x.preco <= budget * .45
+        );
+
+    }
+    else if(budget < 30000){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("5070 Ti") &&
+            x.preco <= budget * .40
+        );
+
+    }
+    else if(budget < 45000){
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RTX 5080") &&
+            x.preco <= budget * .55
+        );
+
+    }
+    else{
+
+        gpu = escolher(
+            pecas.gpu,
+            x => x.nome.includes("RTX 5090") &&
+            x.preco <= budget * .75
+        );
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    CASO A GPU ESCOLHIDA NÃO CAIBA
+    ------------------------------------------------------
+    */
+
+    if(!gpu){
+
+        gpu = pecas.gpu
+            .filter(x=>x.preco <= budget*.5)
+            .sort((a,b)=>b.score-a.score)[0];
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    PLACA-MÃE
+    ------------------------------------------------------
+    */
+
+    const motherboard =
+        escolher(
+            pecas.motherboard,
+            x => x.socket === cpu.socket &&
+            x.preco <= budget*.15
+        )
+        ||
+        pecas.motherboard.find(
+            x=>x.socket===cpu.socket
+        );
+
+
+    /*
+    ------------------------------------------------------
+    RAM
+    ------------------------------------------------------
+    */
+
+    let ram;
+
+    if(budget < 1800){
+
+        ram = pecas.ram.find(
+            x=>x.capacity===8
+        );
+
+    }
+    else if(budget < 5000){
+
+        ram = pecas.ram.find(
+            x=>x.capacity===16 &&
+            x.type==="DDR4"
+        );
+
+    }
+    else if(budget < 12000){
+
+        ram = pecas.ram.find(
+            x=>x.capacity===32
+        );
+
+    }
+    else if(budget < 30000){
+
+        ram = pecas.ram.find(
+            x=>x.capacity===64
+        );
+
+    }
+    else{
+
+        ram = pecas.ram.find(
+            x=>x.capacity===128
+        );
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    SSD
+    ------------------------------------------------------
+    */
+
+    let storage;
+
+    if(budget < 1800){
+
+        storage = pecas.storage.find(
+            x=>x.capacity===240
+        );
+
+    }
+    else if(budget < 5000){
+
+        storage = pecas.storage.find(
+            x=>x.capacity===500
+        );
+
+    }
+    else if(budget < 15000){
+
+        storage = pecas.storage.find(
+            x=>x.capacity===1000
+        );
+
+    }
+    else if(budget < 30000){
+
+        storage = pecas.storage.find(
+            x=>x.capacity===2000
+        );
+
+    }
+    else{
+
+        storage = pecas.storage.find(
+            x=>x.capacity===4000
+        );
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    FONTE
+    ------------------------------------------------------
+    */
+
+    let watts = 400;
+
+    if(gpu.score >= 35) watts = 500;
+    if(gpu.score >= 62) watts = 650;
+    if(gpu.score >= 82) watts = 750;
+    if(gpu.score >= 98) watts = 850;
+    if(gpu.score >= 112) watts = 1000;
+    if(gpu.score >= 145) watts = 1200;
+
+
+    const psu =
+        pecas.psu.find(
+            x=>x.watts>=watts
+        );
+
+
+    /*
+    ------------------------------------------------------
+    GABINETE
+    ------------------------------------------------------
+    */
+
+    let casePC;
+
+    if(budget < 3000){
+
+        casePC = pecas.case[0];
+
+    }
+    else if(budget < 8000){
+
+        casePC = pecas.case[1];
+
+    }
+    else if(budget < 15000){
+
+        casePC = pecas.case[2];
+
+    }
+    else if(budget < 30000){
+
+        casePC = pecas.case[3];
+
+    }
+    else{
+
+        casePC = pecas.case[4];
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    COOLER
+    ------------------------------------------------------
+    */
+
+    let cooler;
+
+    if(cpu.nome.includes("3200G") ||
+       cpu.nome.includes("4600G") ||
+       cpu.nome.includes("5600GT")){
+
+        cooler = pecas.cooler[0];
+
+    }
+    else if(cpu.score < 90){
+
+        cooler = pecas.cooler[1];
+
+    }
+    else if(cpu.score < 105){
+
+        cooler = pecas.cooler[2];
+
+    }
+    else if(cpu.score < 115){
+
+        cooler = pecas.cooler[3];
+
+    }
+    else{
+
+        cooler = pecas.cooler[4];
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    LISTA FINAL
+    ------------------------------------------------------
+    */
+
+    const componentes = [
+        {
+            categoria:"Processador",
+            ...cpu
+        },
+        {
+            categoria:"Placa de vídeo",
+            ...gpu
+        },
+        {
+            categoria:"Placa-mãe",
+            ...motherboard
+        },
+        {
+            categoria:"Memória RAM",
+            ...ram
+        },
+        {
+            categoria:"SSD",
+            ...storage
+        },
+        {
+            categoria:"Fonte",
+            ...psu
+        },
+        {
+            categoria:"Gabinete",
+            ...casePC
+        },
+        {
+            categoria:"Cooler",
+            ...cooler
+        }
+    ];
+
+
+    let total =
+        componentes.reduce(
+            (s,p)=>s+p.preco,
+            0
+        );
+
+
+    /*
+    ------------------------------------------------------
+    SEGURANÇA DO ORÇAMENTO
+
+    Se por algum motivo passar do orçamento,
+    removemos peças caras e tentamos reduzir.
+    ------------------------------------------------------
+    */
+
+    if(total > budget){
+
+        const reduzidas = componentes
+            .filter(x=>x.categoria!=="Processador")
+            .sort((a,b)=>b.preco-a.preco);
+
+        for(const item of reduzidas){
+
+            if(total <= budget) break;
+
+            if(item.categoria==="Gabinete"){
+
+                total -= item.preco;
+
+                item.preco = 100;
+
+                item.nome = "Gabinete básico";
+
+                total += item.preco;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    FPS ESTIMADO
+
+    Não é benchmark real.
+    É apenas uma estimativa visual para o protótipo.
+    ------------------------------------------------------
+    */
+
+    const fps = calcularFPS(
+        gpu,
+        game,
+        resolution,
+        quality
+    );
+
+
+    /*
+    ------------------------------------------------------
+    AVISOS
+    ------------------------------------------------------
+    */
+
+    let aviso = "";
+
+    if(budget <= 1200){
+
+        aviso = `
+        <div class="warning">
+        ⚠️ <b>Faixa de R$1.000:</b>
+        aqui o objetivo é montar uma máquina básica e funcional.
+        Não estamos fingindo que ela terá uma placa de vídeo dedicada.
+        Para esse orçamento, APU ou peças usadas/marketplace fazem
+        mais sentido. Um upgrade futuro de RAM/GPU pode transformar
+        bastante a máquina.
+        </div>
+        `;
+
+    }
+
+
+    if(budget >= 30000){
+
+        aviso = `
+        <div class="success">
+        👑 <b>Faixa Extreme:</b>
+        agora o sistema prioriza componentes de alto desempenho,
+        bastante RAM, armazenamento maior, fonte forte e GPU topo de linha.
+        Mesmo com orçamento enorme, não significa gastar dinheiro à toa:
+        o objetivo é maximizar desempenho e qualidade.
+        </div>
+        `;
+
+    }
+
+
+    /*
+    ------------------------------------------------------
+    RENDERIZAÇÃO
+    ------------------------------------------------------
+    */
+
+    let html = `
+
+    <div class="result-header">
+
+        <div>
+            <span class="tier">${nivel}</span>
+
+            <h2>
+                PC para ${jogos[game].nome}
+            </h2>
+
+            <p style="color:#999;margin-top:6px">
+                ${resolution}p • ${quality.toUpperCase()}
+            </p>
+        </div>
+
+        <div>
+
+            <div class="total">
+                ${dinheiro(total)}
+            </div>
+
+            <div class="budget-status">
+                Orçamento: ${dinheiro(budget)}
+            </div>
+
+        </div>
+
+    </div>
+
+    ${aviso}
+
+    <div class="parts">
+    `;
+
+
+    componentes.forEach(part=>{
+
+        html += `
+
+        <div class="part">
+
+            <div>
+
+                <div class="part-name">
+                    ${part.categoria}: ${part.nome}
+                </div>
+
+                <div class="part-info">
+                    ${part.tipo || ""}
+                </div>
+
+                <div class="store-buttons">
+
+                    <a target="_blank"
+                       href="${buscarShopee(part.nome)}">
+                       Shopee
+                    </a>
+
+                    <a target="_blank"
+                       href="${buscarMercadoLivre(part.nome)}">
+                       Mercado Livre
+                    </a>
+
+                    <a target="_blank"
+                       href="${buscarPichau(part.nome)}">
+                       Pichau
+                    </a>
+
+                    <a target="_blank"
+                       href="${buscarKabum(part.nome)}">
+                       KaBuM!
+                    </a>
+
+                    <a target="_blank"
+                       href="${buscarTerabyte(part.nome)}">
+                       Terabyte
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="part-price">
+                ${dinheiro(part.preco)}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    html += `
+    </div>
+
+    <div class="performance">
+
+        <h3>🎮 Desempenho estimado</h3>
+
+        <div class="fps">
+            <span>FPS estimado</span>
+            <strong>${fps} FPS</strong>
+        </div>
+
+        <div class="fps">
+            <span>Resolução</span>
+            <strong>${resolution}p</strong>
+        </div>
+
+        <div class="fps">
+            <span>Qualidade</span>
+            <strong>${quality}</strong>
+        </div>
+
+    </div>
+
+    <div class="warning">
+
+        💡 <b>Importante:</b><br><br>
+
+        Os valores deste protótipo são referências.
+        O site não deve fingir que está vendo o preço atual
+        de Shopee, Mercado Livre ou lojas automaticamente.
+
+        Os botões acima levam você para pesquisar a peça.
+        Para transformar isso em um comparador realmente automático,
+        será necessário conectar o site a um backend/API de preços.
+
+    </div>
+    `;
+
+
+    document.getElementById("resultado").innerHTML = html;
+
+}
+
+
+/*
+=========================================================
+ESTIMADOR DE FPS
+=========================================================
+*/
+
+function calcularFPS(gpu, game, resolution, quality){
+
+    let base = gpu.score * 1.8;
+
+    const exigencia =
+        jogos[game].exigencia;
+
+
+    if(exigencia >= 90){
+
+        base *= .72;
+
+    }
+    else if(exigencia >= 75){
+
+        base *= .82;
+
+    }
+    else if(exigencia >= 60){
+
+        base *= .92;
+
+    }
+
+
+    if(resolution===720){
+
+        base *= 1.35;
+
+    }
+
+    if(resolution===1440){
+
+        base *= .72;
+
+    }
+
+    if(resolution===2160){
+
+        base *= .48;
+
+    }
+
+
+    if(quality==="low"){
+
+        base *= 1.30;
+
+    }
+
+    if(quality==="medium"){
+
+        base *= 1.10;
+
+    }
+
+    if(quality==="ultra"){
+
+        base *= .75;
+
+    }
+
+
+    return Math.max(
+        15,
+        Math.round(base)
+    );
+
+}
+
+
+function mostrarMensagem(msg){
+
+    document.getElementById("resultado").innerHTML = `
+        <div class="empty">
+            ${msg}
+        </div>
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
+```
